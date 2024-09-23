@@ -82,7 +82,12 @@ public class Driver {
             ladders.put(ladder.getStart(), ladder);
         }
 
-        Game game = new Game(100, 1, new HashSet<>(snakes.values()), new HashSet<>(ladders.values()), players);
+        Game game = Game.getBuilder()
+                .setBoardSize(100)
+                .setLadder(new HashSet<>(ladders.values()))
+                .setSnakes(new HashSet<>(snakes.values()))
+                .setPlayers(players)
+                .build();
 
         game.start();
     }

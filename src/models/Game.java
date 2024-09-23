@@ -6,6 +6,47 @@ import services.DiceService;
 import java.util.*;
 
 public class Game extends BaseModel {
+     public static class Builder {
+        private int size;
+        private int diceCount;
+        private Set<Snake> snakes;
+        private Set<Ladder> ladders;
+        private Deque<Player> players;
+
+        public Builder setBoardSize(int size) {
+            this.size = size;
+            return this;
+        }
+
+        public Builder setDiceCount(int count) {
+            this.diceCount = count;
+            return this;
+        }
+
+        public Builder setPlayers(Deque<Player> players) {
+            this.players = players;
+            return this;
+        }
+
+        public Builder setSnakes(Set<Snake> snakes) {
+            this.snakes = snakes;
+            return this;
+        }
+
+        public Builder setLadder(Set<Ladder> ladders) {
+            this.ladders = ladders;
+            return this;
+        }
+
+        public Game build() {
+            return new Game(size, diceCount, snakes, ladders, players);
+        }
+    }
+
+    public static Builder getBuilder() {
+        return new Builder();
+    }
+
     private final Board board;
     private final Deque<Player> players;
     private GameStatus gameStatus;
@@ -13,7 +54,7 @@ public class Game extends BaseModel {
     private final List<Move> moves;
     private final DiceService diceService;
 
-    public Game(int boardSize, int diceCount, Set<Snake> snakes, Set<Ladder> ladders, Deque<Player> players) {
+    private Game(int boardSize, int diceCount, Set<Snake> snakes, Set<Ladder> ladders, Deque<Player> players) {
         this.board = new Board(boardSize, snakes, ladders);
         this.diceService = new DiceService(diceCount);
         this.players = players;
