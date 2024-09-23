@@ -8,7 +8,7 @@ import java.util.*;
 public class Game extends BaseModel {
      public static class Builder {
         private int size;
-        private int diceCount;
+        private int diceCount = 1;
         private Set<Snake> snakes;
         private Set<Ladder> ladders;
         private Deque<Player> players;
